@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <!--vis -->
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KADE</title>
+  <link rel="icon" href="/favicon.png" type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.4.0/rollbar.min.js"></script>
+  <script src="https://gw.alipayobjects.com/os/antv/assets/data-set/0.8.7/data-set.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<link href="/static/index.c3b9b62d.css" rel="stylesheet">
+    <!--vis-->
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+    <!--{#<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/bootstrap.min.css"/>#}-->
+
+    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>
+
+
+    <style>
+
+        .panel-heading {
+            /**/
+            /*{#            background-color: #f7f7f7;#}*/
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-custom">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="/kg/index/">主页</a>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="login-user" href="/kg/login/"></a></li>
+                <li><a href="/kg/settings/">设置</a></li>
+            </ul>
+
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+<div class="container col-md-10 col-md-offset-1 parent">
+
+
+
+    <div class="detai-tabs">
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills tab-nike" role="" style="">
+
+            <li role="" class="active"><a href="#query-content-panel" aria-controls="" role="" data-toggle="tab">关联查询</a>
+            </li>
+
+            <li role="" ><a href="#vis-editor" aria-controls="" role="" data-toggle="tab">可视化</a>
+            </li>
+
+            <li role="" ><a href="#schema-editor" aria-controls="" role="" data-toggle="tab">Schema</a>
+            </li>
+
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="query-content-panel">
+                <!-- 检索框---------------------------------------------------------------------------->
+                <div class="container" style="margin:0">
+
+                    <div class="row col-md-7 " style="padding-left:0px">
+
+
+                        <div class="input-group" style="margin: 20px auto  20px 0px">
+                            <input type="text" id='query-content' class="form-control input-lg" name="subject"
+                                   placeholder=""/>
+                            <span class="input-group-btn">
+           <input type="submit" class="btn btn-default btn-lg btn-query" value="查询" id="query-triple"
+                  onclick="query()">
+                </span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 检索内容---------------------------------------------------------------------->
+
+                <div id='' class="shadow panel panel-default parent-panel" style="padding:15px">
+
+
+                    <!-- entity-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             data-target="#collapseInformation-entity"
+                             style="background-color: rgb(232, 232, 232)">
+                            <h4 class="panel-title">
+                                Nodes Table
+                            </h4>
+                        </div>
+                        <div id="collapseInformation-entity" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                 <p style="display:none"> <span id='nodes-count' class=" red"> </span>  nodes
+         found   matching your search criteria .                   </p>
+                                <div class="entity">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ment2ent-->
+                    <!--<div class="panel panel-default panel-ment2ent">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             data-target="#collapseInformation-ment2ent"
+                             style="background-color: rgb(232, 232, 232)">
+                            <h4 class="panel-title">
+                                Ment2ent Table
+                            </h4>
+                        </div>
+                        <div id="collapseInformation-ment2ent" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="ment2ent">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>-->
+                    <!--ment2ent-->
+
+                    <div class="panel panel-default panel-ment2ent" style="display:none">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             data-target="#collapseInformation-ment2ent"
+                             style="background-color: rgb(232, 232, 232)">
+                            <h4 class="panel-title">
+                                Ment2ent Table
+                            </h4>
+                        </div>
+                        <div id="collapseInformation-ment2ent" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <p style="display:none"> <span id='ment2ent-count' class=" red"> </span>   mention-entity  pairs
+         found   matching your search criteria .                   </p>
+                                <div class="ment2ent">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- triple-->
+                    <div class="panel panel-default panel-triple">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             data-target="#collapseInformation-triple"
+                             style="background-color: rgb(232, 232, 232)">
+                            <h4 class="panel-title">
+                                Edges Table
+                            </h4>
+                        </div>
+                        <div id="collapseInformation-triple" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <p style="display:none"> <span id='edges-count' class=" red"> </span>   edges
+         found   matching your search criteria .                   </p>
+                                <div class="triple">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--types-->
+                    <!--<div class="panel panel-default panel-types">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             data-target="#collapseInformation-types"
+                             style="background-color: rgb(232, 232, 232)">
+                            <h4 class="panel-title">
+                                Type Table
+                            </h4>
+                        </div>
+                        <div id="collapseInformation-types" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="types">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>-->
+
+                </div>
+
+            </div>
+
+            <!--可视化-->
+            <div role="tabpanel" class="tab-pane " id="vis-editor">
+               <!--<div id='' class="shadow panel panel-default parent-panel" style="padding:15px">-->
+                   <div id="root" style=""></div>
+
+                <script type="text/javascript">
+            	 var wh = window.innerHeight;
+            	 var h = wh * 0.8;
+                 document.querySelector('#root').style.height=h+'px';
+
+
+
+
+
+
+            </script>
+               <!--</div>-->
+            </div>
+
+            <!--schema 编辑-->
+            <div role="tabpanel" class="tab-pane " id="schema-editor">
+            <div  class="shadow panel panel-default parent-panel" style="padding:15px">
+            <!--<div role="tabpanel" class="tab-pane " id="schema-editor">-->
+               <div class="panel panel-default panel-schema">
+                        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                             data-target="#collapseInformation-schema"
+                             style="background-color: rgb(232, 232, 232)">
+                            <h4 class="panel-title">
+                                Schema
+                            </h4>
+                        </div>
+                        <div id="collapseInformation-schema" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                                  </p>
+                                <div class="schema">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+<script>
+
+    function getCookie(name) {
+        var strcookie = document.cookie;//获取cookie字符串
+        var arrcookie = strcookie.split("; ");//分割
+//遍历匹配
+        for (var i = 0; i < arrcookie.length; i++) {
+            var arr = arrcookie[i].split("=");
+            if (arr[0] == name) {
+                return arr[1];
+            }
+        }
+        return "";
+    }
+    function showLoginUser() {
+        var isLogin = getCookie("isLogin");
+
+        console.log(isLogin);
+
+
+        var a = document.querySelector('.login-user');
+        if (isLogin == 'True') {
+            var user = getCookie('username');
+            a.innerHTML = user;
+//             a['href']="";
+
+        } else {
+            a.innerHTML='登陆';
+
+        }
+    }
+    showLoginUser();
+
+    function showSelectTriple(name) {
+        document.querySelector('.triple-needLink').innerHTML = name;
+
+    }
+</script>
+
+
+<script src="../../static/library/js/query_single.js"></script>
+<script src="../../static/library/js/query.js"></script>
+<script src="../../static/library/jquery.min.js"></script>
+
+<script src="../../static/library/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!--<script type="text/javascript" src="/static/index.c7e693a2.js"></script></body>-->
+<script type="text/javascript" src="/static/index.4f57499d.js"></script>
+<script>
+
+
+</script>
+</body>
+</html>

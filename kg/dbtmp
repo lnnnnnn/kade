@@ -1,0 +1,11 @@
+db_name = graph
+db_host = 10.141.208.26
+db_port = 27017
+db_username = gdmdbuser
+db_password = 6QEUI8dhnq
+
+db_name = test1
+db_host = localhost
+db_port = 32017
+db_username = null
+db_password = null

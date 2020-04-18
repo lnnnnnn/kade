@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+    <!--{#<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/bootstrap.min.css"/>#}-->
+
+    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
+    <!--<link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="../../static/style.css"/>-->
+    <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="../../static/library/material-bootstrap-wizard.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-custom">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="/kg/index/">主页</a>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="login-user" href="/kg/login/"></a></li>
+                <li><a href="/kg/settings/">设置</a></li>
+            </ul>
+
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="container col-md-10 col-md-offset-1 parent">
+
+    <!--<h3 style="margin-bottom: 40px;">军事知识图谱-运维系统</h3>-->
+
+    <div class="detai-tabs">
+
+
+        <!-- <div class="form-group row ">
+             <label for="userTableName" class="col-sm-2 col-form-label">user表名</label>
+             <div class="col-sm-10">
+                 <input type="text" class="form-control" id="userTableName" placeholder="">
+
+             </div>
+         </div>
+
+
+
+         <div class="form-group row">
+             <label for="triplesTableName" class="col-sm-2 col-form-label">triples表名</label>
+             <div class="col-sm-10">
+                 <input type="" class="form-control" id="triplesTableName" placeholder="">
+             </div>
+         </div>
+
+         <div class="form-group row">
+             <label for="entitiesTableName" class="col-sm-2 col-form-label">entities表名</label>
+             <div class="col-sm-10">
+                 <input type="" class="form-control" id="entitiesTableName" placeholder="">
+             </div>
+         </div>
+         <div class="form-group row">
+             <label for="ment2entTableName" class="col-sm-2 col-form-label">ment2ent表名</label>
+             <div class="col-sm-10">
+                 <input type="" class="form-control" id="ment2entTableName" placeholder="">
+             </div>
+         </div>
+         <div class="form-group row">
+             <label for="typesTableName" class="col-sm-2 col-form-label">types表名</label>
+             <div class="col-sm-10">
+                 <input type="" class="form-control" id="typesTableName" placeholder="">
+             </div>
+         </div>-->
+
+
+        <div class="wizard-container">
+            <div class="card wizard-card" data-color="purple" id="wizard">
+                <form action="" method="">
+                    <!--        You can switch " data-color="rose" "  with one of the next bright colors: "blue", "green", "orange", "purple"        -->
+
+                    <div class="wizard-header">
+                        <h3 class="wizard-title">
+                            配置数据库地址、用户名、密码
+                        </h3>
+                        <h4 class="info-text"> (修改配置后需重启服务才生效)</h4>
+                    </div>
+                    <div class="wizard-navigation">
+                        <ul >
+                            <li value="settings-server"><a href="#database-panel" data-toggle="tab">数据库服务器</a></li>
+                            <!--<li value="settings-user"><a href="#user-table-panel" data-toggle="tab">user(用户)</a></li>
+                            <li value="settings-entities"><a href="#entities-table-panel"
+                                                             data-toggle="tab">Nodes</a></li>
+                            <li value="settings-triples"><a href="#triples-table-panel"
+                                                            data-toggle="tab">Edges</a></li>-->
+                            <!--<li value="settings-ment2ent"><a href="#ment2ent-table-panel" data-toggle="tab">ment2ent（mention
+                                to entity）</a></li>
+
+
+                            <li value="settings-types"><a href="#types-table-panel" data-toggle="tab">types(类型)</a></li>-->
+
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <!--databese-->
+                        <div class="tab-pane" id="database-panel">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <!--<h4 class="info-text"> 配置数据库服务器</h4>-->
+                                    <div class="col-sm-5 col-sm-offset-1">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">数据库名</label>
+                                            <input type="text" class="form-control" id="DB-NAME"
+                                                   value={{res.server.DB_NAME}}>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">server</label>
+                                        <input type="text" class="form-control" value={{res.server.DB_HOST}}
+                                               id="DB-HOST">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">port(0~65535)</label>
+                                        <input type="text" class="form-control" value={{res.server.DB_PORT}}
+                                               id="DB-PORT">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">username</label>
+                                        <input type="text" class="form-control"
+                                               id="DB-USERNAME" value={{res.server.DB_USERNAME}}>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">password</label>
+                                        <input type="text" class="form-control"
+                                               id="DB-PASSWORD" value={{res.server.DB_PASSWORD}}>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!--<div class="wizard-footer">
+                                <div class="pull-right">
+                                    <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                           value='保存'/>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>-->
+                        </div>
+
+                        <!--databese end-->
+
+                        <!--user-->
+                        <div class="tab-pane" id="user-table-panel">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <h4 class="info-text"> 配置user表（表为空时，表名字段名的配置才生效）</h4>
+                                    <div class="col-sm-5 col-sm-offset-1">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">user表名</label>
+                                            <input type="text" class="form-control" id="user-table"
+                                                   value={{res.user.userTableName}}>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">用户名字段</label>
+                                        <input type="text" class="form-control" value={{res.user.user_username}}
+                                               id="user_username">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">密码字段</label>
+                                        <input type="text" class="form-control" value={{res.user.user_password}}
+                                               id="user_password">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!-- <div class="wizard-footer">
+                                 <div class="pull-right">
+                                     <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                            value='保存'/>
+
+                                 </div>
+
+                                 <div class="clearfix"></div>
+                             </div>-->
+                        </div>
+                        <!--user end-->
+
+                        <!-- entities -->
+                        <div class="tab-pane" id="entities-table-panel">
+                            <div class="row">
+                                <!--<div class="col-sm-10">-->
+                                <h4 class="info-text"> 配置Nodes表（表为空时，表名字段名的配置才生效）</h4>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Nodes表名</label>
+                                        <input type="text" class="form-control" id="entities-table"
+                                               value={{res.nodes.nodesTableName}}>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">可编辑?</label>
+
+                                        <select class="form-control" id="eitities-editable">
+                                            {% if res.nodes.nodes_editable == 'True' %}
+                                            <option value="True" selected="true">Yes</option>
+                                            <option value="False">No</option>
+                                            {% else %}
+                                            <option value="True">Yes</option>
+                                            <option value="False" selected="true">No</option>
+                                            {% endif %}
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!--</div>-->
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">node字段</label>
+                                        <input type="text" class="form-control" value={{res.nodes.nodes_node}}
+                                               id="entities_node">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">时间戳字段</label>
+                                        <input type="text" class="form-control"
+                                               value={{res.nodes.nodes_timestamp}}
+                                               id="entities_timestamp">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!--<div class="wizard-footer">
+                                <div class="pull-right">
+                                    <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                           value='保存'/>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>-->
+                        </div>
+                        <!--  entities-end -->
+
+                        <!-- triples -->
+                        <div class="tab-pane" id="triples-table-panel">
+                            <div class="row">
+                                <!--<div class="col-sm-10">-->
+                                <h4 class="info-text"> 配置Edges表（表为空时，表名字段名的配置才生效）</h4>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Edges表名</label>
+                                        <input type="text" class="form-control" id="triples-table"
+                                               value={{res.edges.edgesTableName}}>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">可编辑?</label>
+                                        <select class="form-control" id="triples-editable">
+                                            {% if res.edges.edges_editable == 'True' %}
+                                            <option value="True" selected="true">Yes</option>
+                                            <option value="False">No</option>
+                                            {% else %}
+                                            <option value="True">Yes</option>
+                                            <option value="False" selected="true">No</option>
+                                            {% endif %}
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!--</div>-->
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">u字段</label>
+                                        <input type="text" class="form-control" value={{res.edges.edges_u}}
+                                               id="edges_u">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">v字段</label>
+                                        <input type="text" class="form-control" value={{res.edges.edges_v}}
+                                               id="edges_v">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">w字段</label>
+                                        <input type="text" class="form-control" value={{res.edges.edges_w}}
+                                               id="edges_w">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">tp字段</label>
+                                        <input type="text" class="form-control" value={{res.edges.edges_tp}}
+                                               id="edges_tp">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">时间戳字段</label>
+                                        <input type="text" class="form-control" value={{res.edges.edges_timestamp}}
+                                               id="edges_timestamp">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- <div class="wizard-footer">
+                                 <div class="pull-right">
+                                     <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                            value='保存'/>
+
+                                 </div>
+
+                                 <div class="clearfix"></div>
+                             </div>-->
+                        </div>
+                        <!-- triples end -->
+
+                        <!-- ment2ent -->
+                       <!-- <div class="tab-pane" id="ment2ent-table-panel">
+                            <div class="row">
+                                &lt;!&ndash;<div class="col-sm-10">&ndash;&gt;
+                                <h4 class="info-text"> 配置ment2ent表（表为空时，表名字段名的配置才生效）</h4>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">ment2ent表名</label>
+                                        <input type="text" class="form-control" id="ment2ent-table"
+                                               value={{res.ment2ent.ment2entTableName}}>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">可编辑?</label>
+                                        <select class="form-control" id="ment2ent-editable">
+                                            {% if res.ment2ent.ment2ent_editable == 'True' %}
+                                           <option value="True" selected="true">Yes</option>
+                                            <option value="False">No</option>
+                                            {% else %}
+                                            <option value="True">Yes</option>
+                                            <option value="False" selected="true">No</option>
+                                            {% endif %}
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                &lt;!&ndash;</div>&ndash;&gt;
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">mention字段</label>
+                                        <input type="text" class="form-control" value={{res.ment2ent.ment2ent_m}}
+                                               id="ment2ent_m">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">entity字段</label>
+                                        <input type="text" class="form-control" value={{res.ment2ent.ment2ent_e}}
+                                               id="ment2ent_e">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">时间戳字段</label>
+                                        <input type="text" class="form-control"
+                                               value={{res.ment2ent.ment2ent_timestamp}}
+                                               id="ment2ent_timestamp">
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            &lt;!&ndash; <div class="wizard-footer">
+                                 <div class="pull-right">
+                                     <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                            value='保存'/>
+
+                                 </div>
+
+                                 <div class="clearfix"></div>
+                             </div>&ndash;&gt;
+                        &lt;!&ndash;</div>&ndash;&gt;
+                        &lt;!&ndash; ment2ent  end &ndash;&gt;
+                        &lt;!&ndash; types &ndash;&gt;
+                        <div class="tab-pane" id="types-table-panel">
+                            <div class="row">
+                                &lt;!&ndash;<div class="col-sm-10">&ndash;&gt;
+                                <h4 class="info-text"> 配置types表（表为空时，表名字段名的配置才生效）</h4>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">types表名</label>
+                                        <input type="text" class="form-control" id="types-table"
+                                               value={{res.types.typesTableName}}>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">可编辑?</label>
+                                        <select class="form-control" id="types-editable">
+                                            &lt;!&ndash;<option disabled="" selected=""></option>&ndash;&gt;
+                                            {% if res.types.types_editable == 'True' %}
+                                            <option value="True" selected="true">Yes</option>
+                                            <option value="False">No</option>
+                                            {% else %}
+                                            <option value="True">Yes</option>
+                                            <option value="False" selected="true">No</option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                &lt;!&ndash;</div>&ndash;&gt;
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">entity字段</label>
+                                        <input type="text" class="form-control" value={{res.types.types_entity}}
+                                               id="types_entity">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">type字段</label>
+                                        <input type="text" class="form-control" value={{res.types.types_type}}
+                                               id="types_type">
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-sm-offset-1">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">时间戳字段</label>
+                                        <input type="text" class="form-control" value={{res.types.types_timestamp}}
+                                               id="types_timestamp">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            &lt;!&ndash;<div class="wizard-footer">
+                                <div class="pull-right">
+                                    <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                           value='保存'/>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>&ndash;&gt;
+                        </div>
+                        &lt;!&ndash; types end &ndash;&gt;
+                    </div>
+-->
+
+                    <div class="wizard-footer">
+                        <div class="pull-right">
+                            <input type='button' class='btn  btn-fill btn-primary btn-wd' name='save-settings'
+                                   value='保存' onclick="saveDB_settings()"/>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!--<div class="wizard-footer">
+                        <div class="pull-right">
+                            <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next'
+                                   value='Next'/>
+                            <input type='button' class='btn btn-finish btn-fill btn-primary btn-wd' name='finish'
+                                   value='Finish'/>
+                        </div>
+                        <div class="pull-left">
+                            <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous'
+                                   value='Previous'/>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>-->
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+<!--   Core JS Files   -->
+<script src="../../static/library/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="../../static/library/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../../static/library/js/jquery.bootstrap.js" type="text/javascript"></script>
+
+<!--  Plugin for the Wizard -->
+<script src="../../static/library/js/material-bootstrap-wizard.js"></script>
+
+<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+<script src="../../static/library/js/jquery.validate.min.js"></script>
+<script src="../../static/library/xhr.js"></script>
+<script>
+
+    function getCookie(name) {
+        var strcookie = document.cookie;//获取cookie字符串
+        var arrcookie = strcookie.split("; ");//分割
+//遍历匹配
+        for (var i = 0; i < arrcookie.length; i++) {
+            var arr = arrcookie[i].split("=");
+            if (arr[0] == name) {
+                return arr[1];
+            }
+        }
+        return "";
+    }
+    function showLoginUser() {
+        var isLogin = getCookie("isLogin");
+
+        console.log(isLogin);
+
+
+        var a = document.querySelector('.login-user');
+        if (isLogin == 'True') {
+            var user = getCookie('username');
+            a.innerHTML = user;
+//             a['href']="";
+
+        } else {
+            a.innerHTML='登陆';
+
+        }
+    }
+    showLoginUser();
+
+
+//
+    function getSelectedValue(id){
+        var myselect=document.getElementById(id);
+        var index=myselect.selectedIndex ; // selectedIndex代表的是你所选中项的index
+        var val=myselect.options[index].value;
+
+        return val;
+    }
+    function getFocusItem() {
+        var li = document.querySelector('.wizard-navigation').querySelector('.active');
+//        console.log(li);
+        return li.getAttribute('value')
+    }
+    function saveDB_settings_server() {
+        var panel = document.querySelector('#database-panel');
+        var db_name = panel.querySelector('#DB-NAME').value;
+        var db_host = panel.querySelector('#DB-HOST').value;
+        var db_port = panel.querySelector('#DB-PORT').value;
+        var db_username = panel.querySelector('#DB-USERNAME').value;
+        var db_password = panel.querySelector('#DB-PASSWORD').value;
+        var url = "/kg/saveDB_settings_server/" + db_name + "/" + db_host + '/' + db_port + '/' + db_username + '/' + db_password + '/';
+
+        xhr(url, false, function (res) {
+//            console.log(res);
+            if('saveDB_settings_server success'==res){
+                alert('修改成功！');
+            }
+        });
+    }
+    function saveDB_settings_user(){
+
+
+        var panel = document.querySelector('#user-table-panel');
+        var userTableName = panel.querySelector('#user-table').value;
+
+        var user_username = panel.querySelector('#user_username').value;
+        var user_password = panel.querySelector('#user_password').value;
+        var url = "/kg/saveDB_settings_user/" + userTableName + "/" + user_username + '/' + user_password + '/' ;
+
+        xhr(url, false, function (res) {
+//            console.log(res);
+            if('saveDB_settings_user success'==res){
+                alert('修改成功！');
+            }else{
+                alert(res);
+            }
+        });
+
+    }
+    function saveDB_settings_entities(){
+
+
+        var panel = document.querySelector('#entities-table-panel');
+        var entitiesTableName = panel.querySelector('#entities-table').value;
+
+        var entities_editable=getSelectedValue('eitities-editable');
+//        console.log(entities_editable);
+
+//        var entities_id = panel.querySelector('#entities_id').value;
+        var entities_node = panel.querySelector('#entities_node').value;
+        var entities_timestamp = panel.querySelector('#entities_timestamp').value;
+        var url = "/kg/saveDB_settings_entities/" + entitiesTableName + "/" + entities_editable + '/'  + entities_node + '/' +entities_timestamp+'/';
+
+        xhr(url, false, function (res) {
+//            console.log(res);
+            if('saveDB_settings_entities success'==res){
+                alert('修改成功！');
+            }else{
+                alert(res);
+            }
+        });
+    }
+    function saveDB_settings_triples(){
+        var panel = document.querySelector('#triples-table-panel');
+        var edgesTableName = panel.querySelector('#triples-table').value;
+
+        var edges_editable=getSelectedValue('triples-editable');
+
+        var edges_u = panel.querySelector('#edges_u').value;
+        var edges_v = panel.querySelector('#edges_v').value;
+        var edges_w = panel.querySelector('#edges_w').value;
+        var edges_tp = panel.querySelector('#edges_tp').value;
+        var edges_timestamp = panel.querySelector('#edges_timestamp').value;
+        var url = "/kg/saveDB_settings_triples/" + edgesTableName + "/" + edges_editable + '/' + edges_u+ '/' + edges_v+ '/' + edges_w + '/' +edges_tp+'/'+edges_timestamp+'/';
+
+        xhr(url, false, function (res) {
+//            console.log(res);
+            if('saveDB_settings_triples success'==res){
+                alert('修改成功！');
+            }else{
+                alert(res);
+            }
+        });
+    }
+    function saveDB_settings_ment2ent(){
+        var panel = document.querySelector('#ment2ent-table-panel');
+        var ment2entTableName = panel.querySelector('#ment2ent-table').value;
+
+        var ment2ent_editable=getSelectedValue('ment2ent-editable');
+
+        var ment2ent_m = panel.querySelector('#ment2ent_m').value;
+        var ment2ent_e= panel.querySelector('#ment2ent_e').value;
+        var ment2ent_timestamp = panel.querySelector('#ment2ent_timestamp').value;
+        var url = "/kg/saveDB_settings_ment2ent/" + ment2entTableName + "/" + ment2ent_editable + '/' + ment2ent_m+ '/' + ment2ent_e+  '/' +ment2ent_timestamp+'/';
+
+        xhr(url, false, function (res) {
+//            console.log(res);
+            if('saveDB_settings_ment2ent success'==res){
+                alert('修改成功！');
+            }else{
+                alert(res);
+            }
+        });
+    }
+
+    function saveDB_settings_types(){
+        var panel = document.querySelector('#types-table-panel');
+        var typesTableName = panel.querySelector('#types-table').value;
+
+        var types_editable=getSelectedValue('types-editable');
+
+        var types_entity = panel.querySelector('#types_entity').value;
+        var types_type = panel.querySelector('#types_type').value;
+        var types_timestamp = panel.querySelector('#types_timestamp').value;
+        var url = "/kg/saveDB_settings_types/" + typesTableName + "/" + types_editable + '/' + types_entity+ '/' + types_type+  '/' +types_timestamp+'/';
+
+        xhr(url, false, function (res) {
+//            console.log(res);
+            if('saveDB_settings_types success'==res){
+                alert('修改成功！');
+            }else{
+                alert(res);
+            }
+        });
+    }
+    function saveDB_settings() {
+        var item = getFocusItem();
+        console.log(item);
+
+        switch (item){
+            case 'settings-server' :
+                saveDB_settings_server();
+                break;
+            case 'settings-user':
+                saveDB_settings_user();
+                break;
+            case 'settings-entities':
+                saveDB_settings_entities();
+                break;
+            case 'settings-triples':
+                saveDB_settings_triples();
+                break;
+            /*case 'settings-ment2ent':
+                saveDB_settings_ment2ent();
+                break;
+            case 'settings-types':
+                saveDB_settings_types();
+                break;
+*/
+
+
+        }
+
+    }
+</script>
+</html>
